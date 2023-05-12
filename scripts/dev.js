@@ -1,18 +1,17 @@
-"use strict";
+'use strict';
 
-// const chalk = require("chalk");
-// const server = require("./server");
-// const clearConsole = require("./utils/clearConsole");
+const chalk = require('chalk');
+const server = require('./server');
+const clearConsole = require('./utils/clearConsole');
+const choosePort = require('./utils/choosePort');
 
-// const port = parseInt(process.env.PORT, 10) || 3000;
-// const HOST = process.env.HOST || "0.0.0.0";
+const defaultPort = parseInt(process.env.PORT, 10) || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 
-// server.listen(port, () => {
-//   clearConsole();
-//   chalk.cyna("NIHoS");
-//   // console.log(`Example app listening on port ${port}`);
-// });
+clearConsole();
 
-import chalk from "chalk";
-
-console.log(chalk.blue("Hello world!"));
+choosePort(defaultPort).then(port => {
+  server.listen(port, () => {
+    console.log(chalk.green(`✅ App started on: http://localhost:${port}`));
+  });
+});
