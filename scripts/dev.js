@@ -10,8 +10,15 @@ const HOST = process.env.HOST || '0.0.0.0';
 
 clearConsole();
 
-choosePort(defaultPort).then(port => {
-  server.listen(port, () => {
-    console.log(chalk.green(`✅ App started on: http://localhost:${port}`));
+choosePort(defaultPort)
+  .then(port => {
+    server.listen(port, () => {
+      console.log(chalk.green(`✅ App started on: http://localhost:${port}`));
+    });
+  })
+  .catch(err => {
+    if (err && err.message) {
+      console.log(err.message);
+    }
+    process.exit(1);
   });
-});

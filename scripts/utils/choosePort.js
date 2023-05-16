@@ -1,6 +1,8 @@
 const detect = require('detect-port');
 const chalk = require('chalk');
 
+const isInteractive = process.stdout.isTTY;
+
 module.exports = defaultPort => {
   return detect(defaultPort).then(
     port => {
