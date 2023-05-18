@@ -1,3 +1,5 @@
+'use strict';
+
 const detect = require('detect-port');
 const chalk = require('chalk');
 
