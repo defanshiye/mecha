@@ -8,8 +8,11 @@ module.exports = {
   mode: 'development',
   entry: paths.appServerEntry,
   output: {
-    path: paths.appBuild,
-    filename: 'server.bundle.js',
+    path: `${paths.appBuild}/server`,
+    filename: 'server.entry.js',
+    library: {
+      type: 'commonjs',
+    },
   },
   externals: [nodeExternals()],
   module: {

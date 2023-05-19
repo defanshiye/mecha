@@ -16,4 +16,5 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   appClientEntry: resolveApp('src/client/index.js'),
   appServerEntry: resolveApp('src/server/server.js'),
+  appConfig: resolveApp('mecha.config.js'),
 };

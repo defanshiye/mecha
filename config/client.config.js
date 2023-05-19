@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   entry: paths.appClientEntry,
   output: {
-    path: paths.appBuild,
+    path: `${paths.appBuild}/client`,
     filename: 'client.bundle.js',
   },
   module: {

@@ -3,16 +3,14 @@
 const detect = require('detect-port');
 const chalk = require('chalk');
 
-const isInteractive = process.stdout.isTTY;
-
 module.exports = defaultPort => {
   return detect(defaultPort).then(
     port => {
-      if (port !== defaultPort) {
+      if (port === defaultPort) {
         console.log(
-          chalk.blue(`Something is already running on ${defaultPort}.`)
+          chalk.yellow('warn'),
+          ` - Something is already running on ${defaultPort}, trying ${port} instead.`
         );
-        console.log(chalk.blue('Checking another port instead......\n'));
       }
       return port;
     },

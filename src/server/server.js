@@ -35,27 +35,27 @@ app.use((req, res) => {
   // Then use `assetsByChunkName` for server-side rendering
   // For example, if you have only one main chunk:
   res.send(`
-<html>
-  <head>
-    <title>My App</title>
-    <style>
-    ${normalizeAssets(assetsByChunkName.main)
-      .filter(path => path.endsWith('.css'))
-      .map(path => outputFileSystem.readFileSync(path.join(outputPath, path)))
-      .join('\n')}
-    </style>
-  </head>
-  <body>
-    <div id="app">${content}</div>
-    ${normalizeAssets(assetsByChunkName.main)
-      .filter(path => path.endsWith('.js'))
-      .map(path => `<script src="${path}"></script>`)
-      .join('\n')}
-  </body>
-</html>
+    <html>
+      <head>
+        <title>My App</title>
+        <style>
+        ${normalizeAssets(assetsByChunkName.main)
+          .filter(path => path.endsWith('.css'))
+          .map(path =>
+            outputFileSystem.readFileSync(path.join(outputPath, path))
+          )
+          .join('\n')}
+        </style>
+      </head>
+      <body>
+        <div id="app">${content}</div>
+        ${normalizeAssets(assetsByChunkName.main)
+          .filter(path => path.endsWith('.js'))
+          .map(path => `<script src="${path}"></script>`)
+          .join('\n')}
+      </body>
+    </html>
   `);
 });
 
-app.listen(3000, () => {
-  console.log('app is running: ...');
-});
+module.exports = app;
