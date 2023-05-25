@@ -1,7 +1,7 @@
 'use strict';
 
-const detect = require('detect-port');
 const chalk = require('chalk');
+const detect = require('detect-port');
 
 module.exports = defaultPort => {
   return detect(defaultPort).then(

@@ -1,5 +1,7 @@
 'use strict';
 
+const webpack = require('webpack');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const paths = require('./paths');
 
 module.exports = {
@@ -7,7 +9,7 @@ module.exports = {
   entry: paths.appClientEntry,
   output: {
     path: `${paths.appBuild}/client`,
-    filename: 'client.bundle.js',
+    filename: '[name].[hash].js',
   },
   module: {
     rules: [
@@ -23,4 +25,10 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new LoadablePlugin({
+      filename: 'client-manifest.json',
+    }),
+  ],
 };

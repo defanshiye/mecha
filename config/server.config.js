@@ -1,7 +1,10 @@
 'use strict';
 
+const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+const SSRServerPlugin = require('../plugin/webpack/server-plugin');
 const paths = require('./paths');
+const util = require('./util');
 
 module.exports = {
   target: 'node',
@@ -11,7 +14,7 @@ module.exports = {
     path: `${paths.appBuild}/server`,
     filename: 'server.entry.js',
     library: {
-      type: 'commonjs',
+      type: 'commonjs2',
     },
   },
   externals: [nodeExternals()],
@@ -28,5 +31,18 @@ module.exports = {
         },
       },
     ],
+    // ...util.styleLoaders({
+    //   sourceMap: true,
+    //   usePostCSS: true,
+    //   extract: true,
+    // }),
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.REACT_ENV': JSON.stringify('server'), // 指定React环境为服务端
+    }),
+    new SSRServerPlugin({
+      filename: 'server-bundle.json',
+    }),
+  ],
 };
